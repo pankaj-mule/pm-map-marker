@@ -1,25 +1,51 @@
 MarketPlaces = [];
 isMapsLoaded = false;
 
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    if (slides.length === 0)
+        return;
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex - 1].style.display = "block";
+}
+
 const getInfoWindow = (data) => {
-    return (
-        '<div id="content">' +
-        '<div id="siteNotice">' +
-        "</div>" +
-        '<h1 id="firstHeading" class="firstHeading">' + data.title + '</h1>' +
-        '<div id="bodyContent">' +
-        "<p><b>" + data.title + "</b>, also referred to as <b>Ayers Rock</b>, is a large " +
-        "sandstone rock formation in the southern part of the " +
-        data.address + ". It lies 335&#160;km (208&#160;mi) " +
-        "south west of the nearest large town, Alice Springs; 450&#160;km " +
-        "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
-        "features of the Uluru - Kata Tjuta National Park. Uluru is " +
-        "sacred to the Pitjantjatjara and Yankunytjatjara,</p>" +
-        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-        "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
-        "(last visited June 22, 2009).</p>" +
-        "</div>" +
-        "</div>");
+    return (`
+        <div id="content">
+            <div id="siteNotice"></div>
+            <h2 id="firstHeading" class="firstHeading">${data.title}</h2>
+            <div id="bodyContent">
+                <p><b>${data.address}</b></p>
+                <div class="slideshow-container"> 
+                    ${data.images.map((url, index) => (
+        `<div class="mySlides fade" ${index === 0 ? 'style="display:block"' : ''}>
+         <div class="numbertext">${index + 1} / ${data.images.length}</div>
+         <img src="${url}" style="width:100%">
+      </div>`
+    ))}
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+            </div>
+        </div>
+        `);
 };
 
 const loadLocations = (e) => {
@@ -59,7 +85,7 @@ const addMarkersToMap = (locations) => {
     const map = new google.maps.Map(
         document.getElementById("map"),
         {
-            zoom: 14,
+            zoom: 10,
             center: { lat: Number.parseFloat(locations[0].Lat), lng: Number.parseFloat(locations[0].Long) },
         }
     );
@@ -72,8 +98,13 @@ const addMarkersToMap = (locations) => {
 
     locations.forEach(location => {
         const { Lat, Long, Types, Address, Store_Name, ...others } = location;
+        let images = [];
+        Object.keys(others).forEach(key => {
+            if (key.toLowerCase().startsWith('imageurl'))
+                images.push(others[key]);
+        });
         const infowindow = new google.maps.InfoWindow({
-            content: getInfoWindow({ title: Store_Name, address: Address, ...others }),
+            content: getInfoWindow({ title: Store_Name, address: Address, images, ...others }),
         });
 
         const marker = new google.maps.Marker({
@@ -89,6 +120,8 @@ const addMarkersToMap = (locations) => {
                 map,
                 shouldFocus: false,
             });
+            slideIndex = 1;
+            showSlides(slideIndex);
         });
     });
 }

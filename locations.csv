@@ -1,3 +1,4 @@
-Store_Name,Address,Lat,Long,Types,ImageURLs
-Star Market,Sanpada E,19.064647,73.005363,O,asdasd
-D Mart,Sanpada W,19.064908,73.008283,C,dsasdaasdsd
+Store_Name,Address,Lat,Long,Types,ImageURL,ImageURL2,ImageURL3
+Star Market,Sanpada E,19.064647,73.005363,O,https://www.w3schools.com/tags/img_girl.jpg,https://lh5.googleusercontent.com/-cTEgPOnd3l8/U8-EmaZ4KNI/AAAAAAAABc8/6eacbALkQ6A/w1358-h905-no/carousel-1.JPG,https://lh5.googleusercontent.com/--2iANjL3ikc/U8-EoGJ18mI/AAAAAAAABdI/fBe-q3Gos6Y/w1358-h905-no/carousel-5.jpg
+D Mart,Sanpada W,19.064908,73.008283,C,https://source.unsplash.com/user/c_v_r/1900x800,https://lh5.googleusercontent.com/-cTEgPOnd3l8/U8-EmaZ4KNI/AAAAAAAABc8/6eacbALkQ6A/w1358-h905-no/carousel-1.JPG,https://lh5.googleusercontent.com/--2iANjL3ikc/U8-EoGJ18mI/AAAAAAAABdI/fBe-q3Gos6Y/w1358-h905-no/carousel-5.jpg
+WalMart,Pune W,18.495906371490175,73.90048945053067,C,https://lh5.googleusercontent.com/-cTEgPOnd3l8/U8-EmaZ4KNI/AAAAAAAABc8/6eacbALkQ6A/w1358-h905-no/carousel-1.JPG,https://lh5.googleusercontent.com/--2iANjL3ikc/U8-EoGJ18mI/AAAAAAAABdI/fBe-q3Gos6Y/w1358-h905-no/carousel-5.jpg,https://source.unsplash.com/user/c_v_r/1900x800
